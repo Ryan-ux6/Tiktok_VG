@@ -1,16 +1,19 @@
-Follow this link if you are getting ffmpeg issues: https://www.youtube.com/watch?v=Y6jB-Vyzy7c
+# musicaption
 
-What code does:
-Input:
-- Takes script
-- Takes input youtube link for a video
-- After each generation, can clear the local files so that you can start anew
+I hate subtitling my music videos on TikTok, Reels, and YouTube. This allows me and others to auto-caption their music videos
+using the original video plus an audio recording of their voice speaking the words of the song
 
-Output:
-- Generates a video with subtitles and an ai audio on it.
+# Thoughts
 
-Prereq:
-- Read the readme.md in /subtitles
+For the MVP I'm using an offline speech recognition model from Vosk and MoviePY for subtitles.
 
-Fixes_Required:
-- pre_process_inputs.py, transcriber,py and captioner.py arent/can't be called properly in the main.py
+Vosk generates a JSON "transcript" containing objects with the words and their time bounds in the audio.
+
+Fortunately, subtitles use text + time bounds— go figure. Pass those into MoviePY and voila
+
+If you want to run this WIP MVP:
+1. Set up your Python venv and install the requirements
+2. Install/make sure FFMPEG is installed on your system
+3. Download the vosk-model-en-us-0.22 language model from the Vosk website and unzip the folder in the outermost repo directory
+4. Run mvp.py, giving 'h4t' as the two inputs when prompted to caption the default inputs in the folder
+5. Repeat with your own synced voice + video inputs
