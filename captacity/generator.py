@@ -2,8 +2,8 @@ import captacity
 
 # Run the captioning process
 captacity.add_captions(
-    video_file="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/outputs/final/last.mp4",
-    output_file="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/outputs/final/something.mp4",
+    video_file="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/outputs/final/something.mp4",
+    output_file="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/outputs/final/output.mp4",
 
     font="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/Montserrat-Black.ttf",
     font_size=60,
@@ -19,7 +19,7 @@ captacity.add_captions(
     word_highlight_color="yellow",
 
     line_count=2,
-    max_words_per_frame=5,  # NEW: Limit the words per frame
+    max_words_per_frame=5,  # NEW: Limit the words per frame(Input not working)
     padding=50,
 )
 

@@ -1,14 +1,27 @@
 #!/usr/bin/env python3
 
 from captacity import add_captions
-import sys
+import argparse
+import os
 
 def main():
-    if len(sys.argv) < 3:
-        print(f"Usage: captacity <video_file> <output_file>")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Caption a video file.")
+    parser.add_argument("video_file", help="Path to the input video file.")
+    parser.add_argument("output_file", help="Path to the output video file.")
+    parser.add_argument("--max_words_per_frame", type=int, default=5, help="Maximum words displayed per frame.")
+    
+    args = parser.parse_args()
 
-    video_file = sys.argv[1]
-    output_file = sys.argv[2]
+    if not os.path.exists(args.video_file):
+        print(f"Error: The video file '{args.video_file}' does not exist.")
+        return
 
-    add_captions(video_file, output_file, print_info=True)
+    add_captions(
+        video_file=args.video_file,
+        output_file=args.output_file,
+        print_info=True,
+        max_words_per_frame=args.max_words_per_frame
+    )
+
+if __name__ == "__main__":
+    main()

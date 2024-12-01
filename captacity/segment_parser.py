@@ -12,6 +12,7 @@ def parse(
     segments: list[dict],
     fit_function: Callable,
     allow_partial_sentences: bool = False,
+    max_words_per_frame: int = 2,  # Ensure parameter is forwarded
 ):
     captions = []
     caption = {
@@ -21,24 +22,19 @@ def parse(
         "text": "",
     }
 
-    # Merge words that are not separated by spaces
-    for s, segment in enumerate(segments):
-        for w, word in enumerate(segment["words"]):
-            if w > 0 and word["word"][0] != " ":
-                segments[s]["words"][w-1]["word"] += word["word"]
-                segments[s]["words"][w-1]["end"] = word["end"]
-                del segments[s]["words"][w]
-
-    # Parse segments into captions that fit on the video
     for segment in segments:
         for word in segment["words"]:
             if caption["start"] is None:
                 caption["start"] = word["start"]
 
-            text = caption["text"]+word["word"]
+            text = caption["text"] + word["word"]
 
-            caption_fits = allow_partial_sentences or not has_partial_sentence(text)
-            caption_fits = caption_fits and fit_function(text)
+            caption_fits = (
+                allow_partial_sentences or not has_partial_sentence(text)
+            ) and fit_function(text)
+
+            if max_words_per_frame and len(caption["words"]) >= max_words_per_frame:
+                caption_fits = False
 
             if caption_fits:
                 caption["words"].append(word)
@@ -53,6 +49,7 @@ def parse(
                     "text": word["word"],
                 }
 
-    captions.append(caption)
+    if caption["words"]:
+        captions.append(caption)
 
     return captions
