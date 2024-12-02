@@ -1,11 +1,20 @@
 import captacity
+import os
+
+CURRENT_DIR = os.getcwd()
+INP_FILE_NAME = "something.mp4"
+OUT_FILE_NAME = "output.mp4"
+FONT = "Montserrat-ExtraBold.ttf"
+# Tiktok_VG\captacity\assets\fonts\Montserrat-ExtraBold.ttf
+print(os.path.join(CURRENT_DIR, f"assets/content/input/video/{INP_FILE_NAME}"))
 
 # Run the captioning process
 captacity.add_captions(
-    video_file="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/outputs/final/something.mp4",
-    output_file="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/outputs/final/output.mp4",
+    
+    video_file = os.path.join(CURRENT_DIR, f"assets/content/input/video/{INP_FILE_NAME}"), # "C:/Users/HP/Desktop/2024/Extra/VideoGenerator/Ryan/Tiktok_VG/captacity/assets/content/input/video/something.mp4",
+    output_file = os.path.join(CURRENT_DIR, f"assets/content/output/{OUT_FILE_NAME}"),
 
-    font="C:/Users/ryana/Documents/VsCode/VideoGenerator/VideoGenerator-main/VideoGenerator-main/subtitles/Montserrat-Black.ttf",
+    font="C:/Users/HP/Desktop/2024/Extra/VideoGenerator/Ryan/Tiktok_VG/captacity/assets/fonts/Montserrat-ExtraBold.ttf", # os.path.join(CURRENT_DIR, f"assets/fonts/{FONT}"),
     font_size=60,
     font_color="white",
 
@@ -18,8 +27,7 @@ captacity.add_captions(
     highlight_current_word=True,
     word_highlight_color="yellow",
 
-    line_count=2,
-    max_words_per_frame=5,  # NEW: Limit the words per frame(Input not working)
+    line_count=1,
     padding=50,
 )
 
